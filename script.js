@@ -17,8 +17,23 @@ function navigateToSection(sectionId) {
     currentSectionId = sectionId;
 }
 
+function validateCurrentSection() {
+    const currentSection = document.getElementById(currentSectionId);
+    const inputs = currentSection.querySelectorAll('input, select, textarea');
+    for (let input of inputs) {
+        if (input.value.trim() === '') {
+            // Show alert if a field is empty
+            alert('Please fill out all required fields before proceeding.');
+            return false;
+        }
+    }
+    return true;
+}
+
 function nextSection(nextSectionId) {
-    navigateToSection(nextSectionId);
+    if (validateCurrentSection()) {
+        navigateToSection(nextSectionId);
+    }
 }
 
 // Initialize the first section as visible
